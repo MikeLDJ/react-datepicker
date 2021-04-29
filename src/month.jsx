@@ -211,10 +211,9 @@ export default class Month extends React.Component {
   };
 
   onMonthClick = (e, m) => {
-    this.handleDayClick(
-      utils.getStartOfMonth(utils.setMonth(this.props.day, m)),
-      e
-    );
+    const date = utils.setYear(this.props.minDate, utils.getYear(this.props.day)) ||
+      utils.getStartOfMonth(this.props.day);
+    this.handleDayClick(utils.setMonth(date, m), e);
   };
 
   handleMonthNavigation = (newMonth, newDate) => {
@@ -410,7 +409,7 @@ export default class Month extends React.Component {
       showMonthYearPicker,
       showQuarterYearPicker
     } = this.props;
-    
+
     return classnames(
       "react-datepicker__month",
       {

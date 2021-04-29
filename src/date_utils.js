@@ -475,7 +475,9 @@ export function isQuarterDisabled(
 }
 
 export function isYearDisabled(year, { minDate, maxDate } = {}) {
-  const date = new Date(year, 0, 1);
+  const month = minDate ? getMonth(minDate) : 0;
+  const day = minDate ? getDate(minDate) : 1;
+  const date = new Date(year, month, day);
   return isOutOfBounds(date, { minDate, maxDate }) || false;
 }
 

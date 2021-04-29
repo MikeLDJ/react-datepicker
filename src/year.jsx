@@ -22,8 +22,18 @@ export default class Year extends React.Component {
   }
 
   handleYearClick = (day, event) => {
+    let date = day;
+    const { minDate } = this.props;
+
+    if (minDate) {
+      const yyyy = utils.getYear(day);
+      const MM = minDate ? utils.getMonth(minDate) : 0;
+      const dd = minDate ? utils.getDate(minDate) : 1;
+      date = new Date(yyyy, MM, dd);
+    }
+
     if (this.props.onDayClick) {
-      this.props.onDayClick(day, event);
+      this.props.onDayClick(date, event);
     }
   };
 
